@@ -1,0 +1,138 @@
+/* Обёртка страницы */
+.nominations-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px 24px;
+}
+
+.nominations-intro {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+/* Сетка карточек */
+.nominations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Карточка номинации */
+.nomination-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.nomination-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Картинка */
+.nomination-image-wrapper {
+    width: 100%;
+    height: 220px; /* БЫЛО 160 — увеличили */
+    overflow: hidden;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nomination-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nomination-image-placeholder {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Контент карточки */
+.nomination-card-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nomination-title {
+    margin: 0;
+    font-size: 17px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.nomination-description {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    min-height: 42px;
+}
+
+.nomination-card-footer {
+    margin-top: 10px;
+}
+
+/* Кнопка */
+.button {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #1976d2;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.button.disabled {
+    background: #999;
+    pointer-events: none;
+}
+
+/* Бейджи. Если не определены в common.css — на всякий случай. */
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.badge-open {
+    background: #e3ffe3;
+    border: 1px solid #7ac27a;
+}
+
+.badge-closed {
+    background: #ffe3e3;
+    border: 1px solid #c27a7a;
+}
+
+/* Адаптив под мобилки */
+@media (max-width: 600px) {
+    .nominations-page {
+        padding: 0 10px 20px;
+    }
+
+    .nominations-grid {
+        gap: 14px;
+    }
+
+    .nomination-image-wrapper {
+        height: 200px;
+    }
+}

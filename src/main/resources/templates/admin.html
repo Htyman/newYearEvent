@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: site-header"></div>
+
+<main>
+    <div class="top-bar">
+        <a href="/nominations" class="back-link">&larr; К списку номинаций</a>
+        <span><strong>Админ-панель</strong></span>
+    </div>
+
+    <!-- Логин/логаут через куку с JWT -->
+    <div class="form-block">
+        <div data-login-status class="message">Проверка статуса входа...</div>
+
+        <form data-login-form style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px;">
+            <input type="text" name="login" placeholder="Логин"
+                   style="padding: 4px 6px; flex: 1 1 120px;">
+            <input type="password" name="password" placeholder="Пароль"
+                   style="padding: 4px 6px; flex: 1 1 120px;">
+            <button type="submit">Войти</button>
+            <button type="button" class="secondary" data-logout-button>Выйти</button>
+        </form>
+        <div data-login-error class="message error"></div>
+    </div>
+
+    <h2>Номинации</h2>
+
+    <div data-admin-message class="message"></div>
+
+    <table data-admin-nomination-table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="n : ${nominations}">
+            <td th:text="${n.id}">1</td>
+            <td th:text="${n.name}">Название</td>
+            <td>
+                <span th:if="${n.active}" class="badge badge-open">Открыта</span>
+                <span th:if="${!n.active}" class="badge badge-closed">Закрыта</span>
+            </td>
+            <td>
+                <button type="button"
+                        data-admin-open
+                        th:attr="data-nomination-id=${n.id}"
+                        th:if="${!n.active}">
+                    Открыть
+                </button>
+                <button type="button"
+                        data-admin-close
+                        th:attr="data-nomination-id=${n.id}"
+                        th:if="${n.active}">
+                    Закрыть
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Создать номинацию</h2>
+    <div class="form-block">
+        <form data-admin-create-nomination-form>
+            <label>
+                Название:
+                <input type="text" name="name" required>
+            </label>
+            <label>
+                Описание:
+                <textarea name="description" rows="3"></textarea>
+            </label>
+            <label>
+                URL картинки (опционально):
+                <input type="text" name="photoUrl">
+            </label>
+            <button type="submit">Создать номинацию</button>
+        </form>
+        <div data-admin-create-nomination-message class="message"></div>
+    </div>
+
+    <h2>Создать кандидата</h2>
+    <div class="form-block">
+        <form data-admin-create-candidate-form>
+            <label>
+                Имя:
+                <input type="text" name="name" required>
+            </label>
+            <label>
+                Фамилия:
+                <input type="text" name="surname">
+            </label>
+            <label>
+                URL фото (опционально):
+                <input type="text" name="photoUrl">
+            </label>
+            <label>
+                Описание:
+                <textarea name="description" rows="3"></textarea>
+            </label>
+            <button type="submit">Создать кандидата</button>
+        </form>
+        <div data-admin-create-candidate-message class="message"></div>
+    </div>
+
+    <h2>Привязать кандидата к номинации</h2>
+    <div class="form-block">
+        <form data-admin-link-form>
+            <label>
+                ID номинации:
+                <input type="number" name="nominationId" required>
+            </label>
+            <label>
+                ID кандидата:
+                <input type="number" name="candidateId" required>
+            </label>
+            <button type="submit">Привязать</button>
+        </form>
+        <div data-admin-link-message class="message"></div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: site-footer"></div>
+
+<script src="/js/app.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

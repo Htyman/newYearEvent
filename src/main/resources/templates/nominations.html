@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Номинации</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/nominations.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: site-header}"></div>
+
+<main class="nominations-page">
+    <h1>Номинации</h1>
+
+    <p class="nominations-intro">
+        Выберите номинацию и проголосуйте за того, кто, по вашему мнению, лучше всего подходит под описание.
+    </p>
+
+    <div th:if="${#lists.isEmpty(nominations)}">
+        Номинаций пока нет.
+    </div>
+
+    <div th:if="${!#lists.isEmpty(nominations)}" class="nominations-grid">
+        <article th:each="nom : ${nominations}" class="nomination-card">
+            <!-- Картинка номинации -->
+            <div th:if="${nom.photoUrl != null}" class="nomination-image-wrapper">
+                <img th:src="${nom.photoUrl}"
+                     alt="Изображение номинации"
+                     class="nomination-image">
+            </div>
+            <div th:if="${nom.photoUrl == null}"
+                 class="nomination-image-wrapper nomination-image-placeholder">
+                <span>нет картинки</span>
+            </div>
+
+            <!-- Тело карточки -->
+            <div class="nomination-card-body">
+                <h2 class="nomination-title">
+                    <span th:text="${nom.name}">Название номинации</span>
+                    <span th:if="${nom.active}" class="badge badge-open">Открыта</span>
+                    <span th:if="${!nom.active}" class="badge badge-closed">Закрыта</span>
+                </h2>
+
+                <p class="nomination-description"
+                   th:text="${nom.description}">
+                    Описание номинации...
+                </p>
+
+                <div class="nomination-card-footer">
+                    <a th:href="@{/nominations/{id}(id=${nom.id})}"
+                       th:classappend="${nom.active} ? '' : ' disabled'"
+                       class="button">
+                        Перейти к голосованию
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

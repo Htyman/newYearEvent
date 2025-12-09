@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Групповая премия</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: site-header"></div>
+
+<main>
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-title">Мини-премия «Лучшее из года»</div>
+            <div class="hero-subtitle">
+                Небольшая новогодняя премия внутри нашей учебной группы.
+                Голосуем за друг друга в забавных и тёплых номинациях, чтобы подвести итоги года.
+            </div>
+            <p>
+                Здесь можно отметить тех, кто поднимал настроение на парах, помогал с ДЗ,
+                придумывал мемы, держал группу в тонусе и просто был крутым человеком весь год ✨
+            </p>
+            <div class="hero-actions">
+                <a href="/nominations">Перейти к номинациям</a>
+                <a href="/login" class="secondary">Войти и голосовать</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Здесь можно положить свои картинки (например, в /static/images/...) -->
+            <img src="/images/group-awards-banner.png"
+                 alt="Групповая премия — новогодний ивент">
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Как всё устроено?</h2>
+        <ul>
+            <li>Админ заранее создаёт номинации и добавляет кандидатов.</li>
+            <li>Каждый студент может проголосовать <strong>по одному разу в каждой номинации</strong>.</li>
+            <li>Результаты скрыты до тех пор, пока голосование в номинации не будет закрыто.</li>
+            <li>Если передумал — можно отменить свой голос и проголосовать снова.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>Примеры номинаций</h2>
+        <div class="nomination-preview-list">
+            <div class="nomination-preview">«Душа группы»</div>
+            <div class="nomination-preview">«Самый пунктуальный»</div>
+            <div class="nomination-preview">«Мемолог года»</div>
+            <div class="nomination-preview">«Гений дедлайнов»</div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: site-footer"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

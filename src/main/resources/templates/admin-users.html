@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статус голосования пользователей</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: site-header}"></div>
+
+<main>
+    <div class="top-bar">
+        <a href="/admin" class="back-link">&larr; Назад в админку</a>
+        <span><strong>Статус голосования пользователей</strong></span>
+    </div>
+
+    <p class="hint">
+        Здесь видно, сколько номинаций заполнил каждый пользователь.
+    </p>
+
+    <table class="users-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Логин</th>
+            <th>Имя</th>
+            <th>Роль</th>
+            <th>Проголосовано</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${statuses}">
+            <td th:text="${s.user.id}">1</td>
+            <td th:text="${s.user.login}">login</td>
+            <td th:text="${(s.user.name != null ? s.user.name : '') + ' ' + (s.user.surname != null ? s.user.surname : '')}">
+                Имя Фамилия
+            </td>
+            <td th:text="${s.user.role}">USER</td>
+            <td th:text="${s.votedNominations + ' / ' + s.totalNominations}">0 / 0</td>
+            <td>
+                <!-- ВАЖНО: обращаемся к boolean-свойству, а не методу -->
+                <span th:if="${s.completed}" class="status-badge status-ok">Все</span>
+                <span th:if="${!s.completed}" class="status-badge status-partial">Не все</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

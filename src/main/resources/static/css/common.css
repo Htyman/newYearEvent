@@ -1,0 +1,232 @@
+/* Базовая раскладка: сайт на всю высоту, футер внизу */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Делаем body флекс-контейнером:
+   header + main + footer = колонка, футер уезжает вниз */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #222;
+    background: radial-gradient(circle at top, #fef7ff, #f4f7ff);
+}
+
+/* Флекс-дети body */
+body > header,
+body > main,
+body > footer,
+body > div {
+    box-sizing: border-box;
+}
+
+/* Основной контейнер страницы */
+body > main {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px 16px 32px;
+    animation: fadeIn 0.25s ease-out;
+}
+
+/* Общий стиль ссылок и кнопок */
+a {
+    color: #1976d2;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #0d47a1;
+}
+
+/* Кнопки */
+button,
+a.button {
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+button:hover,
+a.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+button:active,
+a.button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Хедер */
+.site-header {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.site-header .left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.site-header .logo {
+    font-weight: 700;
+    color: #1976d2;
+    font-size: 18px;
+}
+
+.site-header nav a {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.site-header nav a:last-child {
+    margin-right: 0;
+}
+
+.site-header .right {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-header .logout-btn {
+    margin-left: 4px;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 999px;
+    border: 1px solid #1976d2;
+    background: #fff;
+    color: #1976d2;
+}
+
+/* Бейджи */
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.badge-open {
+    background: #e3ffe3;
+    border: 1px solid #7ac27a;
+}
+
+.badge-closed {
+    background: #ffe3e3;
+    border: 1px solid #c27a7a;
+}
+
+/* Футер */
+.site-footer {
+    margin-top: auto; /* за счёт flex у body футер прижимается вниз */
+    border-top: 1px solid #e0e0e0;
+    background: linear-gradient(90deg, #faf8ff, #f5f8ff);
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.site-footer-inner {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #777;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-footer-title {
+    font-weight: 600;
+    color: #444;
+}
+
+.site-footer-note {
+    opacity: 0.9;
+    font-size: 12px;
+}
+
+/* Таблицы и сообщения */
+.message {
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.message.error {
+    color: #b71c1c;
+}
+
+.message.success {
+    color: #2e7d32;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    font-size: 14px;
+}
+
+th {
+    background: #f5f5f5;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптив */
+@media (max-width: 720px) {
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-header .right {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+
+    body > main {
+        padding: 12px 12px 24px;
+    }
+
+    .site-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}

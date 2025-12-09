@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Кандидаты</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-candidates.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: site-header}"></div>
+
+<main>
+    <div class="top-bar">
+        <a href="/admin" class="back-link">&larr; Назад в админку</a>
+        <span><strong>Список кандидатов</strong></span>
+    </div>
+
+    <p class="hint">
+        Здесь выводятся все кандидаты с их ID, именем, фото и описанием.
+    </p>
+
+    <table class="candidates-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фото</th>
+            <th>Описание</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${candidates}">
+            <td th:text="${c.id}">1</td>
+            <td th:text="${(c.name != null ? c.name : '') + ' ' + (c.surname != null ? c.surname : '')}">
+                Имя Фамилия
+            </td>
+            <td>
+                <div class="candidate-photo-cell">
+                    <img th:if="${c.photoUrl != null}"
+                         th:src="${c.photoUrl}"
+                         alt="Фото кандидата"
+                         class="candidate-photo-thumb">
+                    <span th:if="${c.photoUrl == null}" class="no-photo">
+                        нет фото
+                    </span>
+                </div>
+                <div class="photo-url" th:if="${c.photoUrl != null}">
+                    <a th:href="${c.photoUrl}" target="_blank" rel="noopener noreferrer"
+                       th:text="${c.photoUrl}">
+                        photo url
+                    </a>
+                </div>
+            </td>
+            <td class="candidate-description-cell"
+                th:text="${c.description}">
+                Описание кандидата
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

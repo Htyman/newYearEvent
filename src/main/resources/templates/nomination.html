@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${nomination.name}">Номинация</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/nomination.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: site-header"></div>
+
+<main>
+    <a href="/nominations" class="back-link">&larr; Все номинации</a>
+
+    <h1>
+        <span th:text="${nomination.name}">Название номинации</span>
+        <span th:if="${nomination.active}" class="badge badge-open">Открыта</span>
+        <span th:if="${!nomination.active}" class="badge badge-closed">Закрыта</span>
+    </h1>
+
+    <p th:text="${nomination.description}">Описание номинации...</p>
+
+    <div th:if="${error != null}" class="error">
+        <span th:switch="${error}">
+            <span th:case="'already_voted'">Вы уже голосовали в этой номинации.</span>
+            <span th:case="'not_found'">Кандидат или номинация не найдены.</span>
+            <span th:case="'closed'">Голосование по этой номинации закрыто.</span>
+            <span th:case="*">Произошла ошибка. Попробуйте ещё раз.</span>
+        </span>
+    </div>
+
+    <div th:if="${userVoted}" class="info-box">
+        Вы уже проголосовали за:
+        <strong th:text="${userVoteCandidateName}">Имя Фамилия</strong>.
+        <br/>
+        Вы можете отменить голос и проголосовать заново.
+        <br/>
+        <button type="button"
+                style="margin-top: 6px; background: #b71c1c;"
+                data-cancel-vote
+                th:attr="data-nomination-id=${nomination.id}">
+            Отменить голос
+        </button>
+    </div>
+
+    <form data-vote-form th:attr="data-nomination-id=${nomination.id}">
+        <ul class="candidate-grid">
+            <li th:each="c : ${candidates}" class="candidate-card">
+                <div class="candidate-header">
+                    <img th:if="${c.photoUrl != null}"
+                         th:src="${c.photoUrl}"
+                         alt="Фото кандидата"
+                         class="candidate-photo">
+                    <div th:if="${c.photoUrl == null}"
+                         class="candidate-photo"
+                         style="display:flex;align-items:center;justify-content:center;font-size:12px;color:#777;">
+                        фото
+                    </div>
+                    <div class="candidate-name-block">
+                        <div class="candidate-name"
+                             th:text="${c.name + ' ' + (c.surname != null ? c.surname : '')}">
+                            Имя Фамилия
+                        </div>
+                    </div>
+                </div>
+                <div class="candidate-description"
+                     th:if="${c.description != null}"
+                     th:text="${c.description}">
+                    Описание кандидата
+                </div>
+                <div class="candidate-footer">
+                    <label>
+                        <input type="radio"
+                               name="candidateId"
+                               th:value="${c.id}"
+                               required
+                               th:checked="${userVoted} ? (${userVoteCandidateId} == ${c.id}) : false">
+                        <span>Голосовать</span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+
+        <button type="submit" th:disabled="${!nomination.active}">
+            Проголосовать
+        </button>
+    </form>
+
+    <div data-vote-message style="margin-top: 8px; font-weight: bold; color: #1976d2;"></div>
+
+    <div th:if="${!nomination.active}">
+        <h2>Результаты голосования</h2>
+
+        <div th:if="${#lists.isEmpty(results)}">
+            Пока никто не проголосовал.
+        </div>
+
+        <table th:if="${!#lists.isEmpty(results)}" border="1" cellpadding="4" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Кандидат</th>
+                <th>Голосов</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${results}">
+                <td th:text="${r.name + ' ' + (r.surname != null ? r.surname : '')}">Имя Фамилия</td>
+                <td th:text="${r.votes}">0</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: site-footer"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
