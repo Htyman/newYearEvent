@@ -1,0 +1,60 @@
+.hint {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+/* Таблица кандидатов */
+.candidates-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    background: rgba(15,23,42,0.9);
+}
+
+.candidates-table th,
+.candidates-table td {
+    border: 1px solid #1f2937;
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.candidates-table th {
+    background: #020617;
+    text-align: left;
+}
+
+.candidate-photo-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.candidate-photo-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #374151;
+    background: #020617;
+}
+
+.no-photo {
+    font-size: 12px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.photo-url a {
+    font-size: 11px;
+    word-break: break-all;
+}
+
+.candidate-description-cell {
+    max-width: 400px;
+    word-wrap: break-word;
+    color: #cbd5f5;
+}

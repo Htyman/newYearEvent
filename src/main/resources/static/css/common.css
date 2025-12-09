@@ -14,7 +14,23 @@ body {
 
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #222;
-    background: radial-gradient(circle at top, #fef7ff, #f4f7ff);
+
+    /* 1 — картинка, 2 — мягкий градиент под ней */
+    background-image:
+            url("/images/ny-snow-bg.png"),
+            radial-gradient(circle at top, #fef7ff, #f4f7ff);
+
+    /* не повторяем — один большой фон */
+    background-repeat: no-repeat, no-repeat;
+
+    /* картинку растягиваем на весь экран, градиент как обычно */
+    background-size: cover, auto;
+
+    /* держим фон на месте при скролле (по желанию можно убрать) */
+    background-attachment: fixed, fixed;
+
+    /* центрируем картинку */
+    background-position: center top, center top;
 }
 
 /* Флекс-дети body */
@@ -113,7 +129,7 @@ a.button:active {
     gap: 8px;
 }
 
-.site-header .logout-btn {
+.site-header .logout-btn, .theme-toggle {
     margin-left: 4px;
     padding: 3px 8px;
     font-size: 12px;

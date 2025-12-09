@@ -1,0 +1,28 @@
+.results-intro {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.results-nomination-card {
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 14px;
+    background: rgba(15,23,42,0.95);
+    box-shadow: 0 6px 20px rgba(0,0,0,.8);
+    color: #e5e7eb;
+}
+
+.winner-block {
+    margin: 8px 0;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(22,163,74,0.18);
+    border: 1px solid #4ade80;
+    font-size: 14px;
+}
+
+.results-table {
+    margin-top: 8px;
+}

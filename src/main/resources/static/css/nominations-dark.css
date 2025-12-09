@@ -1,0 +1,141 @@
+/* Обёртка страницы */
+.nominations-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px 24px;
+}
+
+.nominations-intro {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+/* Сетка карточек */
+.nominations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Карточка номинации */
+.nomination-card {
+    background: rgba(15,23,42,0.95);
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.nomination-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.95);
+}
+
+/* Картинка */
+.nomination-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nomination-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nomination-image-placeholder {
+    color: #6b7280;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Контент карточки */
+.nomination-card-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nomination-title {
+    margin: 0;
+    font-size: 17px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    color: #e5e7eb;
+}
+
+.nomination-description {
+    margin: 0;
+    font-size: 14px;
+    color: #cbd5f5;
+    min-height: 42px;
+}
+
+.nomination-card-footer {
+    margin-top: 10px;
+}
+
+/* Кнопка */
+.button {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.button.disabled {
+    background: #4b5563;
+    pointer-events: none;
+}
+
+/* Бейджи */
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.badge-open {
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.7);
+    color: #bbf7d0;
+}
+
+.badge-closed {
+    background: rgba(248,113,113,0.12);
+    border: 1px solid rgba(248,113,113,0.7);
+    color: #fecaca;
+}
+
+/* Адаптив под мобилки */
+@media (max-width: 600px) {
+    .nominations-page {
+        padding: 0 10px 20px;
+    }
+
+    .nominations-grid {
+        gap: 14px;
+    }
+
+    .nomination-image-wrapper {
+        height: 200px;
+    }
+}

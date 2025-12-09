@@ -1,0 +1,253 @@
+/* Базовая раскладка: сайт на всю высоту, футер внизу */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* body = flex-колонка */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #e5e7eb;
+
+    /* Фон: тёмный + звёзды + лёгкий градиент */
+    background-color: #050818;
+    background-image:
+            radial-gradient(circle at top, rgba(59,130,246,0.12), rgba(15,23,42,0.95)),
+            url("/images/ny-stars-bg.png");
+    background-repeat: no-repeat, no-repeat;
+    background-position: center top, center top;
+    background-size: cover, cover;
+    background-attachment: fixed, fixed;
+}
+
+/* Флекс-дети body */
+body > header,
+body > main,
+body > footer,
+body > div {
+    box-sizing: border-box;
+}
+
+/* Основной контейнер страницы */
+body > main {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px 16px 32px;
+    animation: fadeIn 0.25s ease-out;
+}
+
+/* Общий стиль ссылок и кнопок */
+a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #bfdbfe;
+}
+
+/* Кнопки */
+button,
+a.button {
+    cursor: pointer;
+    transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.1s ease;
+}
+
+button:hover,
+a.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+button:active,
+a.button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Хедер */
+.site-header {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #1f2937;
+    background: rgba(15,23,42,0.92);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.site-header .left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.site-header .logo {
+    font-weight: 700;
+    color: #60a5fa;
+    font-size: 18px;
+}
+
+.site-header nav a {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #e5e7eb;
+}
+
+.site-header nav a:last-child {
+    margin-right: 0;
+}
+
+.site-header .right {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e5e7eb;
+}
+
+/* Кнопка выхода и переключатель темы */
+.site-header .logout-btn,
+.theme-toggle {
+    margin-left: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 999px;
+    border: 1px solid #60a5fa;
+    background: transparent;
+    color: #e5e7eb;
+}
+
+.site-header .logout-btn:hover,
+.theme-toggle:hover {
+    background: rgba(37,99,235,0.25);
+}
+
+/* Бейджи */
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.badge-open {
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.7);
+    color: #bbf7d0;
+}
+
+.badge-closed {
+    background: rgba(248,113,113,0.12);
+    border: 1px solid rgba(248,113,113,0.7);
+    color: #fecaca;
+}
+
+/* Футер */
+.site-footer {
+    margin-top: auto;
+    border-top: 1px solid #1f2937;
+    background: radial-gradient(circle at top left, #111827, #020617);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.6);
+}
+
+.site-footer-inner {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #9ca3af;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-footer-title {
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+.site-footer-note {
+    opacity: 0.9;
+    font-size: 12px;
+}
+
+/* Таблицы и сообщения */
+.message {
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.message.error {
+    color: #fecaca;
+}
+
+.message.success {
+    color: #bbf7d0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: rgba(15,23,42,0.9);
+}
+
+th, td {
+    border: 1px solid #1f2937;
+    padding: 6px 8px;
+    font-size: 14px;
+}
+
+th {
+    background: #020617;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптив */
+@media (max-width: 720px) {
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-header .right {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+
+    body > main {
+        padding: 12px 12px 24px;
+    }
+
+    .site-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}

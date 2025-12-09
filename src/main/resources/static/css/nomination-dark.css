@@ -1,0 +1,131 @@
+.back-link {
+    margin-bottom: 15px;
+    display: inline-block;
+    color: #bfdbfe;
+}
+
+.error {
+    color: #fecaca;
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid #f87171;
+    border-radius: 4px;
+    background: rgba(127,29,29,0.4);
+}
+
+.info-box {
+    margin-bottom: 12px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #60a5fa;
+    background: rgba(15,23,42,0.9);
+    font-size: 14px;
+}
+
+/* Сетка кандидатов */
+.candidate-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.candidate-card {
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 12px;
+    width: 320px;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(15,23,42,0.95);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.candidate-card:hover {
+    box-shadow: 0 10px 26px rgba(0,0,0,0.9);
+    transform: translateY(-2px);
+}
+
+.candidate-header {
+    display: flex;
+    gap: 12px;
+}
+
+.candidate-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #374151;
+    flex-shrink: 0;
+    background: #020617;
+}
+
+.candidate-name-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.candidate-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #e5e7eb;
+}
+
+.candidate-description {
+    font-size: 14px;
+    color: #cbd5f5;
+}
+
+.candidate-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.candidate-footer label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #e5e7eb;
+}
+
+/* Кнопка голосования */
+button {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: #2563eb;
+    color: #e5e7eb;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+}
+
+/* Таблица результатов */
+table {
+    margin-top: 12px;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .candidate-card {
+        width: 100%;
+    }
+
+    .candidate-header {
+        align-items: center;
+    }
+}

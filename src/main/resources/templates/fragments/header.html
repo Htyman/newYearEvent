@@ -18,7 +18,16 @@
                 </a>
             </nav>
         </div>
+
         <div class="right">
+            <!-- Переключатель темы -->
+            <button type="button"
+                    class="theme-toggle"
+                    data-theme-toggle>
+                🌙 Тёмная тема
+            </button>
+
+            <!-- Блок логина/логаута -->
             <span th:if="${currentUser != null}">
                 Привет,
                 <strong th:text="${currentUser.name != null ? currentUser.name : currentUser.login}">

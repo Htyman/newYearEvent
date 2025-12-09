@@ -1,8 +1,60 @@
 (function () {
     document.addEventListener('DOMContentLoaded', () => {
 
-        // ---- ЛОГАУТ (кука с JWT) ----
+        // ====== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (light/dark) ======
+        const THEME_KEY = 'awards-theme';
 
+        function updateToggleLabel(theme) {
+            const btn = document.querySelector('[data-theme-toggle]');
+            if (!btn) return;
+            btn.textContent = theme === 'dark'
+                ? '☀️ Светлая тема'
+                : '🌙 Тёмная тема';
+        }
+
+        function applyTheme(theme) {
+            const links = document.querySelectorAll('link[rel="stylesheet"][href*="/css/"]');
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (!href) return;
+
+                if (theme === 'dark') {
+                    // /css/name.css -> /css/name-dark.css
+                    if (!href.includes('-dark.css')) {
+                        const newHref = href.replace(
+                            /(\/css\/[^?]+)\.css(\?.*)?$/,
+                            '$1-dark.css$2'
+                        );
+                        link.setAttribute('href', newHref);
+                    }
+                } else {
+                    // /css/name-dark.css -> /css/name.css
+                    if (href.includes('-dark.css')) {
+                        const newHref = href.replace('-dark.css', '.css');
+                        link.setAttribute('href', newHref);
+                    }
+                }
+            });
+
+            document.documentElement.setAttribute('data-theme', theme);
+            updateToggleLabel(theme);
+        }
+
+        const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+        applyTheme(savedTheme);
+
+        const themeToggleBtn = document.querySelector('[data-theme-toggle]');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme') || 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(THEME_KEY, next);
+                applyTheme(next);
+            });
+        }
+
+        // ====== ЛОГАУТ (кука с JWT) ======
         const logoutButtons = document.querySelectorAll('[data-logout-button]');
         const loginStatus = document.querySelector('[data-login-status]'); // есть только на админке
 
@@ -26,16 +78,12 @@
                     } catch (err) {
                         console.error('Ошибка при logout', err);
                     }
-                    // После логаута редиректим на страницу входа
                     window.location.href = '/login';
-                    // Если больше нравится просто перезагрузка:
-                    // window.location.reload();
                 });
             });
         }
 
-        // ---- ГОЛОСОВАНИЕ /api/votes ----
-
+        // ====== ГОЛОСОВАНИЕ /api/votes ======
         const voteForm = document.querySelector('[data-vote-form]');
         if (voteForm) {
             voteForm.addEventListener('submit', async (e) => {
@@ -92,8 +140,7 @@
             });
         }
 
-        // ---- ОТМЕНА ГОЛОСА ----
-
+        // ====== ОТМЕНА ГОЛОСА ======
         const cancelVoteBtn = document.querySelector('[data-cancel-vote]');
         if (cancelVoteBtn) {
             cancelVoteBtn.addEventListener('click', async () => {
